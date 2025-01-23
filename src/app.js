@@ -3,6 +3,7 @@ const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
 const carparksRouter = require('./routes/carparks');
+const usersRouter = require('./routes/users');
 
 const app = express()
 // Middleware to parse JSON requests
@@ -13,7 +14,7 @@ const port = 3000
 // Swagger definition options
 const swaggerOptions = {
   definition: {
-    openapi: '3.0.0', // OpenAPI version
+    openapi: '3.0.0',
     info: {
       title: 'Carpark Info API',
       version: '1.0.0',
@@ -37,7 +38,8 @@ const swaggerDocs = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Use the routes
-app.use('/api', carparksRouter);
+app.use('/api/carparks', carparksRouter);
+app.use('/api/users', usersRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
